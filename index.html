@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Maqueta de dashboard BI para la gestión de reparación de contenedores CCO.">
+  <title>CCO Intelligence · Maqueta BI</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" aria-label="Navegación principal">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div><strong>CCO Intelligence</strong><small>Control operacional BI</small></div>
+      </div>
+      <nav class="nav-list">
+        <button class="nav-item active" data-view="resumen"><span class="nav-icon">⌂</span><span>Resumen ejecutivo</span></button>
+        <button class="nav-item" data-view="flujo"><span class="nav-icon">↳</span><span>Flujo operacional</span></button>
+        <button class="nav-item" data-view="estimaciones"><span class="nav-icon">◇</span><span>Estimaciones</span></button>
+        <button class="nav-item" data-view="taller"><span class="nav-icon">⌁</span><span>Taller</span></button>
+        <button class="nav-item" data-view="recursos"><span class="nav-icon">◫</span><span>Recursos</span></button>
+        <button class="nav-item" data-view="calidad"><span class="nav-icon">✓</span><span>Calidad de datos</span></button>
+      </nav>
+      <div class="sidebar-note">
+        <span class="eyebrow">TFM · Entrega 1</span>
+        <p>Prototipo para validar alcance, indicadores y arquitectura analítica.</p>
+      </div>
+      <div class="sidebar-footer"><span class="status-dot"></span> Datos anonimizados<br><small>Corte: 24 oct 2026</small></div>
+    </aside>
+
+    <main id="main" class="main-content">
+      <header class="topbar">
+        <button id="menuToggle" class="icon-button menu-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+        <div>
+          <p class="eyebrow">MÁSTER EN BUSINESS INTELLIGENCE Y ANALYTICS</p>
+          <h1 id="pageTitle">Resumen ejecutivo</h1>
+        </div>
+        <div class="top-actions">
+          <label class="select-wrap"><span>Periodo</span><select id="periodSelect" aria-label="Seleccionar periodo"><option value="all">Histórico</option><option value="2024">2024</option><option value="2025">2025</option><option value="2026">2026</option></select></label>
+          <button id="presentationBtn" class="button ghost">Modo presentación</button>
+          <button id="exportBtn" class="button primary">Exportar resumen</button>
+        </div>
+      </header>
+
+      <div class="prototype-banner"><span class="pill warning">PROTOTIPO</span><p>Maqueta basada en la extracción CCO. Los valores afectados por el límite de 65.535 filas del formato XLS se señalan como exploratorios.</p><button class="link-button" data-go="calidad">Ver calidad →</button></div>
+
+      <section class="view active" id="view-resumen" aria-labelledby="pageTitle">
+        <div class="hero-panel">
+          <div><p class="eyebrow">VISIÓN DE NEGOCIO</p><h2>De datos operativos dispersos a decisiones de taller trazables</h2><p>Una vista integrada del ingreso, la aprobación y la reparación de contenedores para anticipar esperas, controlar excepciones y mejorar el cumplimiento.</p></div>
+          <div class="hero-score"><span>Índice de confiabilidad</span><strong>78</strong><small>/100 · requiere modernizar la extracción</small></div>
+        </div>
+
+        <div class="kpi-grid">
+          <article class="kpi-card"><div class="kpi-top"><span>Ingresos registrados</span><span class="info" title="Filas del detalle de ingreso">i</span></div><strong data-kpi="entries">8.400</strong><p><b>5.883</b> contenedores distintos</p><div class="spark bars" data-spark="entries"></div></article>
+          <article class="kpi-card"><div class="kpi-top"><span>Ciclos de taller</span><span class="info" title="Ciclos identificados en la tabla de taller">i</span></div><strong data-kpi="cycles">9.395</strong><p><b>9.334</b> con término registrado</p><div class="spark line"><svg viewBox="0 0 200 42" aria-hidden="true"><path d="M2 36L35 10L68 32L101 24L134 8L167 16L198 30"/><path class="area" d="M2 36L35 10L68 32L101 24L134 8L167 16L198 30V42H2Z"/></svg></div></article>
+          <article class="kpi-card accent"><div class="kpi-top"><span>Espera mediana</span><span class="tag">Aprobación → inicio</span></div><strong>15 <small>días</small></strong><p>P90: <b>62 días</b> · P95: 86 días</p><div class="progress"><span style="width:62%"></span></div></article>
+          <article class="kpi-card"><div class="kpi-top"><span>Duración mediana</span><span class="tag green">Taller</span></div><strong>0 <small>días</small></strong><p>Promedio: <b>1,6 días</b> · P90: 4 días</p><div class="progress green"><span style="width:24%"></span></div></article>
+        </div>
+
+        <div class="grid two-thirds">
+          <article class="panel">
+            <div class="panel-head"><div><p class="eyebrow">TENDENCIA</p><h3>Actividad anual</h3></div><div class="legend"><span><i class="dot purple"></i> Ciclos aprobados</span><span><i class="dot gold"></i> Ingresos</span></div></div>
+            <div id="annualChart" class="chart" role="img" aria-label="Gráfico de actividad anual"></div>
+          </article>
+          <article class="panel priority-panel">
+            <div class="panel-head"><div><p class="eyebrow">FOCO EJECUTIVO</p><h3>Prioridades detectadas</h3></div><span class="count-badge">3</span></div>
+            <div class="priority high"><span class="priority-rank">01</span><div><strong>Reducir la espera pre-taller</strong><p>El 10% de los ciclos supera 62 días.</p></div></div>
+            <div class="priority medium"><span class="priority-rank">02</span><div><strong>Eliminar el truncamiento XLS</strong><p>Estimaciones y bitácoras alcanzan el límite físico.</p></div></div>
+            <div class="priority low"><span class="priority-rank">03</span><div><strong>Completar la trazabilidad</strong><p>Incorporar Gate Out, ubicación y facturación.</p></div></div>
+          </article>
+        </div>
+
+        <div class="grid three">
+          <article class="mini-panel"><div class="mini-icon purple-bg">↗</div><div><span>Completitud de ingresos</span><strong>99,2%</strong><small>13 cabeceras sin detalle</small></div></article>
+          <article class="mini-panel"><div class="mini-icon green-bg">✓</div><div><span>Vinculación de materiales</span><strong>99,64%</strong><small>con ciclos de taller</small></div></article>
+          <article class="mini-panel"><div class="mini-icon gold-bg">!</div><div><span>Cobertura maestro histórico</span><strong>80,7%</strong><small>requiere dimensión histórica</small></div></article>
+        </div>
+      </section>
+
+      <section class="view" id="view-flujo">
+        <div class="section-intro"><div><p class="eyebrow">TRAZABILIDAD END-TO-END</p><h2>Flujo operacional del contenedor</h2><p>El modelo propuesto une los hitos críticos y deja visibles las brechas de integración.</p></div><span class="data-note">Las etapas reflejan poblaciones distintas; no representan una conversión uno a uno.</span></div>
+        <div class="flow-map">
+          <div class="flow-step"><span class="step-num">01</span><i class="flow-icon">↓</i><strong>Ingreso</strong><b>8.400</b><small>líneas registradas</small></div><div class="flow-arrow">→</div>
+          <div class="flow-step limited"><span class="step-num">02</span><i class="flow-icon">◇</i><strong>Estimación</strong><b>2.852</b><small>documentos visibles*</small></div><div class="flow-arrow">→</div>
+          <div class="flow-step"><span class="step-num">03</span><i class="flow-icon">✓</i><strong>Aprobación</strong><b>8.831</b><small>documentos con evento</small></div><div class="flow-arrow">→</div>
+          <div class="flow-step"><span class="step-num">04</span><i class="flow-icon">⌁</i><strong>Taller</strong><b>9.395</b><small>ciclos identificados</small></div><div class="flow-arrow">→</div>
+          <div class="flow-step"><span class="step-num">05</span><i class="flow-icon">■</i><strong>Término</strong><b>9.334</b><small>ciclos terminados</small></div>
+        </div>
+        <div class="grid two">
+          <article class="panel"><div class="panel-head"><div><p class="eyebrow">CUELLO DE BOTELLA</p><h3>Espera entre aprobación e inicio</h3></div><span class="tag">9.341 ciclos con inicio</span></div><div class="distribution"><div style="--w:24%"><span>Mediana</span><i></i><b>15 d</b></div><div style="--w:56%"><span>P75</span><i></i><b>35 d</b></div><div style="--w:100%"><span>P90</span><i></i><b>62 d</b></div><div style="--w:100%" class="danger"><span>P95</span><i></i><b>86 d</b></div></div><p class="caption">El indicador más útil para gestión diaria es la cola de aprobados aún no iniciados, segmentada por antigüedad.</p></article>
+          <article class="panel"><div class="panel-head"><div><p class="eyebrow">EXCEPCIONES</p><h3>Casos que requieren atención</h3></div></div><div class="exception-list"><div><span class="severity red"></span><strong>54</strong><p>Aprobados sin inicio de taller</p></div><div><span class="severity amber"></span><strong>7</strong><p>Iniciados sin término registrado</p></div><div><span class="severity gray"></span><strong>5</strong><p>Fechas negativas por revisar</p></div></div></article>
+        </div>
+      </section>
+
+      <section class="view" id="view-estimaciones">
+        <div class="section-intro"><div><p class="eyebrow">PRESUPUESTOS Y APROBACIONES</p><h2>Estimaciones bajo control</h2><p>Seguimiento de estados, tiempos de respuesta y consistencia de códigos.</p></div><span class="pill warning">MUESTRA TRUNCADA</span></div>
+        <div class="alert warning-alert"><strong>Atención:</strong> la tabla de estimaciones contiene exactamente 65.535 filas y termina en enero de 2026. Los conteos monetarios o de líneas no deben usarse como verdad financiera hasta migrar la extracción.</div>
+        <div class="kpi-grid compact">
+          <article class="kpi-card"><span>Documentos visibles</span><strong>2.852</strong><p>1.972 contenedores distintos</p></article>
+          <article class="kpi-card"><span>Eventos de aprobación</span><strong>27.799</strong><p>8.831 documentos</p></article>
+          <article class="kpi-card"><span>Vínculo estimación–aprobación</span><strong>32,09%</strong><p class="bad-text">afectado por truncamiento</p></article>
+          <article class="kpi-card"><span>Cobertura de catálogos</span><strong>100%</strong><p>componente · daño · reparación</p></article>
+        </div>
+        <div class="grid two">
+          <article class="panel"><div class="panel-head"><div><p class="eyebrow">VOLUMEN DE EVENTOS</p><h3>Códigos de aprobación</h3></div><span class="info" title="Se preservan códigos porque sus descripciones no fueron verificadas">i</span></div><div id="approvalChart" class="horizontal-chart"></div></article>
+          <article class="panel"><div class="panel-head"><div><p class="eyebrow">GOBIERNO DE DATOS</p><h3>Semáforo de uso</h3></div></div><div class="traffic-list"><div><span class="traffic green"></span><p><strong>Catálogos maestros</strong><small>Cobertura completa de códigos</small></p></div><div><span class="traffic amber"></span><p><strong>Estados de aprobación</strong><small>Volumen útil; falta diccionario funcional</small></p></div><div><span class="traffic red"></span><p><strong>Costos y facturación</strong><small>No aptos para KPI financieros</small></p></div></div></article>
+        </div>
+      </section>
+
+      <section class="view" id="view-taller">
+        <div class="section-intro"><div><p class="eyebrow">PRODUCTIVIDAD OPERACIONAL</p><h2>Rendimiento del taller</h2><p>Visibilidad sobre el backlog, los tiempos de ciclo y las excepciones de ejecución.</p></div><span class="pill success">9.395 CICLOS</span></div>
+        <div class="metric-band"><div><span>Aprobados sin iniciar</span><strong>54</strong><small>backlog crítico</small></div><div><span>Iniciados sin terminar</span><strong>7</strong><small>trabajo en curso</small></div><div><span>Duración promedio</span><strong>1,6 d</strong><small>inicio → término</small></div><div><span>Duración P90</span><strong>4 d</strong><small>umbral operacional</small></div></div>
+        <div class="grid two-thirds">
+          <article class="panel"><div class="panel-head"><div><p class="eyebrow">EVOLUCIÓN</p><h3>Ciclos aprobados por año</h3></div></div><div id="workshopChart" class="chart tall"></div></article>
+          <article class="panel"><div class="panel-head"><div><p class="eyebrow">DISTRIBUCIÓN</p><h3>Tiempo dentro del taller</h3></div></div><div class="donut-wrap"><div class="donut" style="--p:90"><div><strong>90%</strong><small>≤ 4 días</small></div></div><p>La reparación es relativamente rápida una vez iniciada. La principal oportunidad está antes de entrar al taller.</p></div></article>
+        </div>
+        <article class="panel"><div class="panel-head"><div><p class="eyebrow">REGLAS DE ALERTA PROPUESTAS</p><h3>Cola operacional priorizada</h3></div><button class="button ghost small" data-demo-toast>Simular actualización</button></div><div class="table-wrap"><table><thead><tr><th>Regla</th><th>Umbral</th><th>Prioridad</th><th>Acción sugerida</th></tr></thead><tbody><tr><td>Aprobado sin inicio</td><td>&gt; 30 días</td><td><span class="pill danger">Alta</span></td><td>Asignar capacidad y fecha compromiso</td></tr><tr><td>En taller sin término</td><td>&gt; 4 días</td><td><span class="pill warning">Media</span></td><td>Revisar repuestos y bloqueo técnico</td></tr><tr><td>Fecha inconsistente</td><td>duración &lt; 0</td><td><span class="pill neutral">Datos</span></td><td>Corregir fuente antes de publicar KPI</td></tr></tbody></table></div></article>
+      </section>
+
+      <section class="view" id="view-recursos">
+        <div class="section-intro"><div><p class="eyebrow">MATERIALES Y PERSONAS</p><h2>Recursos vinculados a la operación</h2><p>Base analítica para controlar consumo y carga técnica sin exponer datos personales.</p></div><span class="data-note">Vista agregada y anonimizada</span></div>
+        <div class="kpi-grid compact"><article class="kpi-card"><span>Movimientos de material</span><strong>8.292</strong><p>99,64% vinculados a ciclos</p></article><article class="kpi-card"><span>Cantidad consumida</span><strong>9.514,88</strong><p>unidades registradas</p></article><article class="kpi-card"><span>Repuestos distintos</span><strong>165</strong><p>códigos de material</p></article><article class="kpi-card"><span>Asignaciones técnicas</span><strong>21.210</strong><p>31 códigos técnicos</p></article></div>
+        <div class="grid two"><article class="panel resource-card"><div class="resource-visual material"><span>165</span><small>repuestos</small></div><div><p class="eyebrow">MATERIALES</p><h3>Consumo por ciclo y reparación</h3><p>El tablero productivo debe mostrar cantidad, frecuencia y costo estándar por repuesto, con alertas de consumo atípico.</p><ul class="check-list"><li>Cruce con componente y tipo de reparación</li><li>Top de materiales por volumen y costo</li><li>Desviación frente a la estimación aprobada</li></ul></div></article><article class="panel resource-card"><div class="resource-visual people"><span>31</span><small>códigos</small></div><div><p class="eyebrow">CAPACIDAD</p><h3>Carga técnica agregada</h3><p>Existen asignaciones, pero no horas confiables para medir productividad individual. La primera versión debe enfocarse en capacidad y cobertura.</p><ul class="check-list"><li>Ciclos y tareas asignadas por periodo</li><li>Carga simultánea por equipo</li><li>Privacidad y acceso por rol</li></ul></div></article></div>
+      </section>
+
+      <section class="view" id="view-calidad">
+        <div class="section-intro"><div><p class="eyebrow">OBSERVABILIDAD DEL MODELO</p><h2>Calidad y confiabilidad</h2><p>Los indicadores se publican junto con su nivel de evidencia y controles automáticos.</p></div><div class="quality-score"><strong>78</strong><span>nivel actual<br><b>MEDIO</b></span></div></div>
+        <div class="quality-grid">
+          <article class="quality-card critical"><span>Crítico</span><strong>Límite XLS</strong><p>Estimaciones y bitácora llegan a 65.535 filas.</p><small>Acción: migrar a XLSX/CSV o conexión directa.</small></article>
+          <article class="quality-card warning"><span>Advertencia</span><strong>Histórico maestro</strong><p>80,7% de los ciclos enlaza con el maestro actual.</p><small>Acción: dimensión de contenedor tipo 2.</small></article>
+          <article class="quality-card good"><span>Controlado</span><strong>Ingresos</strong><p>13 cabeceras sin detalle y 1 diferencia declarada.</p><small>Acción: regla de reconciliación en ETL.</small></article>
+          <article class="quality-card good"><span>Controlado</span><strong>Recursos</strong><p>99,64% materiales y 99,97% asignaciones vinculadas.</p><small>Acción: monitoreo diario de claves huérfanas.</small></article>
+        </div>
+        <div class="grid two">
+          <article class="panel"><div class="panel-head"><div><p class="eyebrow">COBERTURA POR DOMINIO</p><h3>Aptitud para analítica</h3></div></div><div class="readiness"><div><span>Operación de taller</span><i><b style="width:92%"></b></i><strong>92%</strong></div><div><span>Ingresos</span><i><b style="width:90%"></b></i><strong>90%</strong></div><div><span>Materiales</span><i><b style="width:88%"></b></i><strong>88%</strong></div><div><span>Estimaciones</span><i><b style="width:48%"></b></i><strong>48%</strong></div><div><span>Facturación</span><i><b style="width:12%"></b></i><strong>12%</strong></div></div></article>
+          <article class="panel"><div class="panel-head"><div><p class="eyebrow">FUENTES POR INCORPORAR</p><h3>Brechas para la solución final</h3></div></div><div class="missing-list"><div><span>01</span><p><strong>Gate Out y permanencia</strong><small>Completar el ciclo logístico del contenedor.</small></p></div><div><span>02</span><p><strong>Facturación y margen</strong><small>Medir ingreso, costo y rentabilidad.</small></p></div><div><span>03</span><p><strong>Horas efectivas</strong><small>Productividad y utilización de capacidad.</small></p></div><div><span>04</span><p><strong>Evidencia fotográfica</strong><small>Trazabilidad de inspección y reparación.</small></p></div></div></article>
+        </div>
+        <article class="panel roadmap"><div><p class="eyebrow">HOJA DE RUTA DE DATOS</p><h3>De prototipo a producto BI</h3></div><div class="roadmap-track"><div class="done"><span>1</span><strong>Perfilar</strong><small>Fuentes y reglas</small></div><div class="active"><span>2</span><strong>Integrar</strong><small>Staging + calidad</small></div><div><span>3</span><strong>Modelar</strong><small>Esquema estrella</small></div><div><span>4</span><strong>Visualizar</strong><small>Power BI</small></div><div><span>5</span><strong>Operar</strong><small>Alertas y gobierno</small></div></div></article>
+      </section>
+      <footer><span>CCO Intelligence · Maqueta conceptual para TFM</span><span>Datos agregados y anonimizados</span></footer>
+    </main>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
